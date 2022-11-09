@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pesuio/landing/landing.dart';
-import 'package:pesuio/profile/profile.dart';
+import 'package:pesuio/screens/input/input.dart';
+import 'package:pesuio/screens/landing/landing.dart';
+
 
 
 class App extends StatefulWidget {
@@ -16,6 +17,7 @@ class _AppState extends State<App> {
     return MaterialApp(
       routes: {
         Landing.routeName: (context) => Landing(),
+        Input.routeName: (context) => Input(),
       },
     );
   }
