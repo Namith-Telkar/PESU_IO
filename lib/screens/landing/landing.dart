@@ -48,6 +48,7 @@ class _LandingState extends State<Landing> {
                       child: ListTile(
                         title: Text(e.name),
                         subtitle: Text(e.srn),
+                        trailing: Icon(Icons.supervised_user_circle),
                       ),
                     ),
                   )
