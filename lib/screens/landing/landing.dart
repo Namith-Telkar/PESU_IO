@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pesuio/models/student.dart';
 import 'package:pesuio/screens/input/input.dart';
 import 'package:pesuio/screens/profile/profile.dart';
@@ -14,8 +15,8 @@ class Landing extends StatefulWidget {
 class _LandingState extends State<Landing> {
   List<Student> students = [
     Student(name: 'Namith', srn: 'Pes2ug19csxyz', phoneNo: '9999'),
-    Student(name: 'Namith', srn: 'Pes2ug19csxyz', phoneNo: '9999'),
-    Student(name: 'Namith', srn: 'Pes2ug19csxyz', phoneNo: '9999')
+    Student(name: 'Shruti', srn: 'Pes2ug19csxyz', phoneNo: '9999'),
+    Student(name: 'Sean', srn: 'Pes2ug19csxyz', phoneNo: '9999')
   ];
   @override
   Widget build(BuildContext context) {
@@ -48,7 +49,9 @@ class _LandingState extends State<Landing> {
                       child: ListTile(
                         title: Text(e.name),
                         subtitle: Text(e.srn),
-                        trailing: Icon(Icons.supervised_user_circle),
+                        trailing: FaIcon(
+                          FontAwesomeIcons.user,
+                        ),
                       ),
                     ),
                   )
