@@ -8,7 +8,7 @@ class AppState{
     required AppState prev,
     List<Student>? newStudents,
 }){
-    students == newStudents ?? prev.students;
+    students = newStudents ?? prev.students;
   }
 
   AppState.initial(){

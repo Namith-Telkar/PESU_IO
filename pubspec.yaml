@@ -39,6 +39,8 @@ dependencies:
   redux: ^5.0.0
   # to prettify
   font_awesome_flutter: ^10.2.1
+  # local storage
+  shared_preferences: ^2.0.15
 
 dev_dependencies:
   flutter_test:
