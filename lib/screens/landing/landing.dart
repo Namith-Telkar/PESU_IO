@@ -20,18 +20,18 @@ class Landing extends StatefulWidget {
 class _LandingState extends State<Landing> {
   late BuildContext appStateContext;
 
-  // late SharedPreferences prefs;
-  // List<Student> students = [];
-  //
-  // void getStoredList() async{
-  //   prefs = await SharedPreferences.getInstance();
-  //   List<String> studentList = prefs.getStringList('studentList') ?? [];
-  //   if(studentList!=[]){
-  //     setState(() {
-  //       students = List<Student>.from(studentList.map((e) => Student.getStudentFromMap(json.decode(e))).toList());
-  //     });
-  //   }
-  // }
+  late SharedPreferences prefs;
+  List<Student> students = [];
+
+  void getStoredList() async{
+    prefs = await SharedPreferences.getInstance();
+    List<String> studentList = prefs.getStringList('studentList') ?? [];
+    if(studentList!=[]){
+      setState(() {
+        students = List<Student>.from(studentList.map((e) => Student.getStudentFromMap(json.decode(e))).toList());
+      });
+    }
+  }
 
   @override
   void initState() {
@@ -39,7 +39,7 @@ class _LandingState extends State<Landing> {
     Future.delayed(
       Duration(seconds: 0),
       () => {
-        // getStoredList()
+        getStoredList()
       },
     );
   }
@@ -66,8 +66,8 @@ class _LandingState extends State<Landing> {
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.1,
                   ),
-                  ...StoreProvider.of<AppState>(appStateContext).state.students!.map(
-                    //...students.map(
+                  //...StoreProvider.of<AppState>(appStateContext).state.students!.map(
+                    ...students.map(
                         (e) => GestureDetector(
                       onTap: () {
                         Navigator.push(

@@ -19,24 +19,27 @@ class Input extends StatefulWidget {
 
 class _InputState extends State<Input> {
   late BuildContext appStateContext;
-  // late SharedPreferences prefs;
+  late SharedPreferences prefs;
   late Student newStudent;
   String name = '';
   String srn = '';
   String phoneNo = '';
 
-
-  // void addToStorage() async {
-  //   prefs = await SharedPreferences.getInstance();
-  //   List<String> studentStringList = StoreProvider.of<AppState>(appStateContext).state.students!.map((e) => json.encode(e.getStudentMap())).toList();
-  //   prefs.setStringList('studentList', studentStringList);
-  // }
+  void addToStorage() async {
+    prefs = await SharedPreferences.getInstance();
+    List<String> studentStringList = StoreProvider.of<AppState>(appStateContext)
+        .state
+        .students!
+        .map((e) => json.encode(e.getStudentMap()))
+        .toList();
+    prefs.setStringList('studentList', studentStringList);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AppState,AppState>(
+    return StoreConnector<AppState, AppState>(
       converter: (store) => store.state,
-      builder: (context, state){
+      builder: (context, state) {
         appStateContext = context;
         return Scaffold(
           resizeToAvoidBottomInset: false,
@@ -44,8 +47,7 @@ class _InputState extends State<Input> {
             child: Container(
               margin: EdgeInsets.symmetric(
                   vertical: MediaQuery.of(context).size.height * 0.05,
-                  horizontal: MediaQuery.of(context).size.width * 0.1
-              ),
+                  horizontal: MediaQuery.of(context).size.width * 0.1),
               width: double.infinity,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -57,94 +59,96 @@ class _InputState extends State<Input> {
                         'assets/images/PESUIOLogo.jpg',
                         height: 200.0,
                         width: 200.0,
-                      )
-                  ),
+                      )),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height*0.05,
+                    height: MediaQuery.of(context).size.height * 0.05,
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.05,vertical: 0.0),
+                    margin: EdgeInsets.symmetric(
+                        horizontal: MediaQuery.of(context).size.width * 0.05,
+                        vertical: 0.0),
                     child: TextField(
-                      onChanged: (val){
+                      onChanged: (val) {
                         setState(() {
                           name = val;
                         });
                       },
                       keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           hintText: 'Please enter name',
                           focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: Colors.blueAccent,
-                                width: 3.0,
-                              )
-                          )
-                      ),
+                            color: Colors.blueAccent,
+                            width: 3.0,
+                          ))),
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height*0.05,
+                    height: MediaQuery.of(context).size.height * 0.05,
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.05,vertical: 0.0),
+                    margin: EdgeInsets.symmetric(
+                        horizontal: MediaQuery.of(context).size.width * 0.05,
+                        vertical: 0.0),
                     child: TextField(
-                      onChanged: (val){
+                      onChanged: (val) {
                         setState(() {
                           srn = val;
                         });
                       },
                       keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           hintText: 'Please enter srn',
                           focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: Colors.blueAccent,
-                                width: 3.0,
-                              )
-                          )
-                      ),
+                            color: Colors.blueAccent,
+                            width: 3.0,
+                          ))),
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height*0.05,
+                    height: MediaQuery.of(context).size.height * 0.05,
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.05,vertical: 0.0),
+                    margin: EdgeInsets.symmetric(
+                        horizontal: MediaQuery.of(context).size.width * 0.05,
+                        vertical: 0.0),
                     child: TextField(
-                      onChanged: (val){
+                      onChanged: (val) {
                         setState(() {
                           phoneNo = val;
                         });
                       },
                       keyboardType: TextInputType.phone,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           hintText: 'Please enter phone number',
                           focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: Colors.blueAccent,
-                                width: 3.0,
-                              )
-                          )
-                      ),
+                            color: Colors.blueAccent,
+                            width: 3.0,
+                          ))),
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height*0.075,
+                    height: MediaQuery.of(context).size.height * 0.075,
                   ),
                   ElevatedButton(
-                    onPressed: (){
+                    onPressed: () {
+                      // newStudent =
+                      //     Student(name: name, srn: srn, phoneNo: phoneNo);
+                      // StoreProvider.of<AppState>(context)
+                      //     .dispatch(AddStudent(newStudent: newStudent));
+                      // Navigator.pushReplacementNamed(
+                      //     context, Landing.routeName);
                       newStudent = Student(name: name, srn: srn, phoneNo: phoneNo);
                       StoreProvider.of<AppState>(context).dispatch(AddStudent(newStudent: newStudent));
+                      addToStorage();
                       Navigator.pushReplacementNamed(context, Landing.routeName);
-                      // newStudent = Student(name: name, srn: srn, phoneNo: phoneNo);
-                      // StoreProvider.of<AppState>(context).dispatch(AddStudent(newStudent: newStudent));
-                      // //addToStorage();
-                      // Navigator.pushReplacementNamed(context, Landing.routeName);
                     },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.black54,
                     ),
-                    child: Padding(
+                    child: const Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Text('Add Student'),
                     ),
